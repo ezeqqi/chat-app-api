@@ -6,7 +6,7 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { User } from '@/users/user.entity';
-import { ChatRoom } from '@/entities/chat-room.entity';
+import { ChatRoom } from '@/chat-room/chat-room.entity';
 
 @Entity('messages')
 export class Message {

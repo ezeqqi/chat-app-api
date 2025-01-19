@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { Message } from '@/entities/message.entity';
+import { Message } from '@/messages/message.entity';
 
 @Entity('users')
 export class User {

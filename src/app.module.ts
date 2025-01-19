@@ -4,6 +4,11 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { MessagesModule } from './messages/messages.module';
+import { ChatRoomModule } from './chat-room/chat-room.module';
+import { User } from './users/user.entity';
+import { ChatRoom } from './chat-room/chat-room.entity';
+import { Message } from './messages/message.entity';
 
 @Module({
   imports: [
@@ -14,11 +19,13 @@ import { UsersModule } from './users/users.module';
       database: 'chat_db',
       username: 'postgres',
       password: 'postgres',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [User, ChatRoom, Message],
       synchronize: true,
     }),
     AuthModule,
     UsersModule,
+    MessagesModule,
+    ChatRoomModule,
     // TypeOrmModule.forFeature([__dirname + '/**/*.entity{.ts,.js}']),
   ],
   controllers: [AppController],

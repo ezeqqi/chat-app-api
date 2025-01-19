@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { Message } from './message.entity';
+import { Message } from '@/messages/message.entity';
 @Entity('chat_rooms')
 export class ChatRoom {
   @PrimaryGeneratedColumn()
