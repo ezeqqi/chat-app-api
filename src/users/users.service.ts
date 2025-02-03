@@ -11,15 +11,22 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<Partial<User>[]> {
     return await this.userRepository.find();
   }
 
-  async findById(id: number): Promise<User | null> {
+  async findById(id: number): Promise<Partial<User> | null> {
     return await this.userRepository.findOneBy({ id });
   }
-  async findByName(nickname: string): Promise<User | null> {
+  async findByName(nickname: string): Promise<Partial<User> | null> {
     return await this.userRepository.findOneBy({ nickname });
+  }
+
+  async findForAuth(nickname: string): Promise<User | null> {
+    return await this.userRepository.findOne({
+      where: { nickname },
+      select: ['id', 'nickname', 'password'],
+    });
   }
 
   async create(userData: UserCreateDto): Promise<User | null> {

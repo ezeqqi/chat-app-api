@@ -17,18 +17,15 @@ export class AuthService {
     nickname: string,
     password: string,
   ): Promise<{ access_token: string }> {
-    const user = await this.usersService.findByName(nickname);
-    console.log('user', user);
+    const user = await this.usersService.findForAuth(nickname);
+    console.log('user sing in', user);
     if (!user) {
       throw new NotFoundException();
     }
-    if (user?.password !== password) {
+    const correctPassword = await user.comparePassword(password);
+    if (!correctPassword) {
       throw new UnauthorizedException();
     }
-    // const { password, ...result } = user;
-    // console.log('password', password);
-    // TODO: Generate a JWT and return it here
-    // instead of the user object
     const payload = {
       sub: user.id,
       nickname: user.nickname,
